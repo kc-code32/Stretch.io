@@ -1,0 +1,399 @@
+/*-------------------- GLOBAL STYLES --------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* // background-color: #f3e0ec */
+body {
+  /* background-color: #383537; */
+  background-color: #f4f3fc;
+  font-family: 'Poppins', sans-serif;
+  color: #5a57aa;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/*-------------------- HEADERCONTAINER STYLES --------------------*/
+
+#navBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 20px 50px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navHeader {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: #7673d4;
+  cursor: pointer;
+}
+
+.flex-item {
+  display: flex;
+  align-items: center;
+}
+
+.flex-item {
+  display: flex;
+  align-items: center;
+}
+
+#flex-item p {
+  font-weight: 300;
+}
+
+#flex-item button {
+  background-color: #7673d4;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.authButtons {
+  display: flex;
+  align-items: center;
+}
+
+.authButton {
+  margin-right: 10px;
+}
+
+#flex-item button:hover {
+  background-color: #5e5bad;
+}
+
+/*-------------------- MAINCONTAINER STYLES --------------------*/
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  display: flex;
+  gap: 20px;
+}
+
+.image {
+  flex: 1;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    flex-direction: column;
+  }
+
+  .reverse {
+    flex-direction: column;
+  }
+}
+
+/*-------------------- MAINCONTAINER STYLES --------------------*/
+
+.searchContainer {
+  background-image: url(./images/pic1.svg);
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.searchInput {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  background-color: #7673d4;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #5e5bad;
+}
+
+.stretchBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.stretchComp {
+  background-image: linear-gradient(
+    to top,
+    #fdcbf1 0%,
+    #fdcbf1 1%,
+    #e6dee9 100%
+  );
+  border-radius: 25px;
+  margin: 10px;
+  padding: 20px;
+  width: calc(33.33% - 20px);
+  border: 1px solid white;
+  /* box-shadow: 10px -2px 20px 2px rgba(114, 114, 114, 0.3); */
+  /* box-shadow: 0 0 10px 5px #48abe0, 0 0 20px 7px #ebecca, 0 0 25px 20px #8a2be2,
+    0 0 30px 25rgb(222, 215, 228) */
+  text-shadow: rgba(136, 125, 148, .3) 0 0 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+/* .stretchComp:nth-child(even) {
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
+
+.stretchComp:nth-child(odd) {
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+} */
+
+.stretchComp:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .stretchComp {
+    width: calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .stretchComp {
+    width: 100%;
+  }
+}
+
+/*-------------------- MODAL STYLES --------------------*/
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 99999;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  padding: 20px;
+  background-color: #7673d4;
+  color: #ffffff;
+}
+
+.modalContent {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.modalFormInput {
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  padding: 0 20px;
+}
+
+.modalButton {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #7673d4;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.modalButton:hover {
+  background-color: #5e5bad;
+}
+
+.modalFooter {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/*-------------------- STRETCH COMPONENT STYLES --------------------*/
+.stretchComp {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stretchComp button {
+  
+  padding: 10px 20px;
+  background-color: #7673d4;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: auto; 
+  align-self: flex-end; 
+  transition: background-color 0.3s ease;
+}
+
+.stretchComp button:hover {
+  background-color: #5e5bad;
+}
+
+
+/*-------------------- DROPDOWN MENU STYLES --------------------*/
+.dropdown {
+  width: 400px;
+  user-select: none;
+  margin: 100px auto;
+  position: relative;
+}
+
+.stretchComp button {
+  padding: 10px 20px;
+  background-color: #7673d4;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: auto;
+  align-self: flex-end;
+  transition: background-color 0.3s ease;
+}
+
+.stretchComp button:hover {
+  background-color: #5e5bad;
+}
+
+/*-------------------- DROPDOWN MENU STYLES --------------------*/
+.submitButton {
+  background: #7673d4;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px 0px 10px 20px;
+  /* margin-top: 20px; */
+  /* margin-left: auto; */
+  /* margin: auto; */
+
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.submitButton:hover {
+  background-color: #5e5bad;
+}
+.selectInput {
+  background-color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 10px 10px;
+  width: 130px;
+  margin-left: 45%;
+}
+
+/* .selectInput:hover {
+  background-color: #333;
+} */
+
+.dropdown-btn {
+  padding: 10px;
+  background: #f4f3fc;
+  box-shadow: 10px -2px 20px 2px rgba(114, 114, 114, 0.2);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  padding: 10px;
+  background: #f4f3fc;
+  box-shadow: 10px -2px 20px 2px rgba(114, 114, 114, 0.2);
+  font-weight: 500;
+  color: #333;
+  width: 95%;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f0ebeb;
+}
+
+
+
+
+

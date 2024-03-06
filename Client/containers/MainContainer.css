@@ -1,0 +1,41 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .section {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .image {
+    flex: 1;
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .reverse {
+    flex-direction: row-reverse;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .section {
+      flex-direction: column;
+    }
+  
+    .reverse {
+      flex-direction: column;
+    }
+  }
+  
