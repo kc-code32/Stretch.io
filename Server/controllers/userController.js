@@ -12,12 +12,8 @@ const userController = {};
 
 // The getStretches method is a function that accepts 3 params, req, res, next, and stores the result of a fetch request to the exercises api in our
 userController.getStretches = async (req, res, next) => {
-  console.log('in');
   try {
-    console.log('HIT!!!');
-    // init const muscle as muscle prop of request query
     const { muscle } = req.body;
-    console.log(muscle);
     // init const apiRes as output from api request
     const response = await axios.get(
       `https://api.api-ninjas.com/v1/exercises?muscle=${muscle}&type=stretching`,
@@ -25,9 +21,7 @@ userController.getStretches = async (req, res, next) => {
         headers: { 'x-api-key': 'SReYt5aEyGMKzrdSe87wew==boZAObqiLCiQPGrb' },
       }
     );
-
-    console.log(response.data);
-
+    // console.log(response.data);
     res.locals.apiRes = response.data;
     return next();
   } catch (error) {
@@ -54,12 +48,12 @@ userController.createUser = (req, res, next) => {
   User.create({ email, name, password }, (err, user) => {
     if (err) {
       res.locals.signedIn = false;
-      //   return next();
-      return next({
-        log: 'Error occurred in userController.createUser',
-        status: 500,
-        message: { err: 'An error occurred in userController.createUser' },
-      });
+        return next();
+      // return next({
+      //   log: 'Error occurred in userController.createUser',
+      //   status: 500,
+      //   message: { err: 'An error occurred in userController.createUser' },
+      // });
     } else {
       res.locals.userDetail = user;
       res.locals.userId = user.id;
@@ -77,10 +71,14 @@ userController.createUser = (req, res, next) => {
 userController.verifyUser = (req, res, next) => {
   // write code here
   const { email, password } = req.body;
-  console.log('verifyUser hit!', email, password);
   if (!email || !password) {
     res.locals.signedIn = false;
-    return next();
+    // return next();
+    return next({
+      log: 'Missing username or password in userController.verifyUser',
+      status: 400,
+      message: { err: 'An error occurred in userController.verifyUser'}
+    });
   }
 
   User.findOne({ email }, (err, user) => {
@@ -93,7 +91,6 @@ userController.verifyUser = (req, res, next) => {
         message: { err: 'An error occurred in userController.verifyUser' },
       });
     } else {
-      console.log('trying bcrypt!');
       bcrypt
         .compare(password, user.password)
         .then((result) => {
@@ -121,13 +118,27 @@ userController.verifyUser = (req, res, next) => {
   });
 };
 
-userController.favorites = async (req, res, next) => {
-  console.log('userController.favs hit');
-  //Confirm format from front end
+userController.getUserDetail = (req, res, next) => {
+  const user = req.cookies.ssid;
+  User.findOne({ _id: user }, (err, user) => {
+    if (err) {
+      // return next();
+      return next({
+        log: 'Error occurred in userController.verifyUser',
+        status: 500,
+        message: { err: 'An error occurred in userController.verifyUser'}
+      });
+    } else {
+      res.locals.userDetail = user;
+      return next();
+    }
+  });
+}
+
+userController.addFavorites = async (req, res, next) => {
+  // console.log('userController.favs hit');
   try {
-    console.log('uC.favs try block');
     const { email, name, equipment, difficulty, instructions } = req.body;
-    console.log('ADD email, name', email, name);
     const doc = await User.findOneAndUpdate(
       { email },
       {
@@ -136,8 +147,7 @@ userController.favorites = async (req, res, next) => {
       { new: true }
     );
     res.locals.addedFavoriteList = doc.favStretches;
-    console.log('res.locals.favoriteList: ', res.locals.addedFavoriteList);
-    //BUILD - EDGE Case - Prevent double add of favorite
+    // console.log('res.locals.favoriteList: ', res.locals.addedFavoriteList);
     return next();
   } catch (err) {
     return next({
@@ -151,7 +161,6 @@ userController.favorites = async (req, res, next) => {
 userController.deleteFavorites = async (req, res, next) => {
   try {
     const { email, name } = req.body;
-    console.log('email, name', email, name);
     const doc = await User.findOneAndUpdate(
       { email },
       {
@@ -162,7 +171,7 @@ userController.deleteFavorites = async (req, res, next) => {
     .populate('favStretches'); // <- here's the change
 
     res.locals.deletedFavoritesList = doc.favStretches;
-    console.log('res.locals.favoriteList: ', res.locals.deletedFavoritesList);
+    // console.log('res.locals.favoriteList: ', res.locals.deletedFavoritesList);
     return next();
   } catch (err) {
     return next({

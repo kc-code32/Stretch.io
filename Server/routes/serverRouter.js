@@ -43,7 +43,7 @@ router.post(
 
 router.patch(
   '/favoriteAdd',
-  userController.favorites,
+  userController.addFavorites,
   (req, res) => {
     return res.status(200).json({
       addedFavoritesList: res.locals.addedFavoriteList,
