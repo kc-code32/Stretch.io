@@ -26,26 +26,45 @@ app.use(express.json());
 // if you ever have a form on your frontend, express.urlencoded
 app.use(express.urlencoded({ extended: true })); // this will be helpful for stringifying a form req from an .html file
 
+/**
+ * handle requests for static files
+ */
+app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
+
+// statically serve everything in the build folder on the route '/build'
+app.use('/build', express.static(path.join(__dirname, '../build')));
+
 
 // send server req to serverRouter
 app.use('/api', serverRouter);
 
+// serve index.html on the route '/'
+app.get('/*', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
 
-//REPLACE THIS WITH A NICE 404 PAGE
-app.get('*', (req, res) => {
-    res.send('API RUNNING!')
-})
-// global error handler
+
+/**
+ * 404 handler
+ */
+app.use('*', (req,res) => {
+  return res.status(404).send('Not Found');
+});
+
+/**
+ * Global error handler
+ */
 app.use((err, req, res, next) => {
-    const defaultErr = {
-        log: 'Express error handler caught unknown middleware error',
-        status: 400,
-        message: { err: 'An error occurred'},
-    };
-    const errorObj = Object.assign({}, defaultErr, err);
-    console.log(errorObj.log);
-    return res.status(errorObj.status).json(errorObj.message);
-})
+  const defaultErr = {
+    log : 'Express error handler caught unknown middleware error',
+    status : 400,
+    message : {err: 'An error occurred'}
+  }
+  const errObj = Object.assign({}, defaultErr, err);
+  console.log(errObj.log);
+  return res.status(errObj.status).json(errObj.message);
+});
+
 
 
 // listener
