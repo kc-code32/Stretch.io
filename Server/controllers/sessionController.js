@@ -12,11 +12,13 @@ sessionController.isLoggedIn = (req, res, next) => {
   Session.findOne({ cookieId: req.cookies.ssid }, 
     (err, session) => {
       if (err) {
-        return next({
-          log: 'Error occurred in sessionController.isLoggedIn.',
-          status: 500,
-          message: { err: 'An error occurred in sessionController.isLoggedIn.' }
-        });
+        res.locals.signedIn = false;
+        return next();
+        // return next({
+        //   log: 'Error occurred in sessionController.isLoggedIn.',
+        //   status: 500,
+        //   message: { err: 'An error occurred in sessionController.isLoggedIn.' }
+        // });
       } else if (!session) {
         res.locals.signedIn = false;
         return next();
@@ -33,8 +35,6 @@ sessionController.isLoggedIn = (req, res, next) => {
 * startSession - create and save a new Session into the database.
 */
 sessionController.startSession = (req, res, next) => {
-  //write code here  Session.create({cookieId: ....})
-  console.log(res.locals.signedIn)
   if (res.locals.signedIn) {
     Session.create({ cookieId : res.locals.userId }, 
       (err, session) => {
