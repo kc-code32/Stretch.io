@@ -58,10 +58,20 @@ module.exports = {
   ],
   //declare devServer
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, 'build'),
     },
-    proxy: { '/api': 'http://localhost:3000' },
-    
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/assets/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+    },
   },
 };
