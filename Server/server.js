@@ -9,7 +9,8 @@ const serverRouter = require('./routes/serverRouter');
 app.use(cookieParser());
 
 // connect to MongoDB
-const MONGO_URI = 'mongodb+srv://brok3turtl3:admin@cluster0.owew19l.mongodb.net/';
+const MONGO_URI = 'mongodb+srv://kelvinchen138:4k8LRm2HZm5FtkiN@stretchio.ls8p7y1.mongodb.net/?retryWrites=true&w=majority&appName=stretchIO';
+// const MONGO_URI = 'mongodb+srv://brok3turtl3:admin@cluster0.owew19l.mongodb.net/';
 
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI
