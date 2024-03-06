@@ -1,5 +1,4 @@
 const User = require('../models/UserModel');
-// const userController = require('./controllers/userController');
 
 const cookieController = {};
 
@@ -7,7 +6,6 @@ const cookieController = {};
 * setSSIDCookie - store the user id in a cookie
 */
 cookieController.setSSIDCookie = (req, res, next) => {
-  // write code here
   if (res.locals.signedIn) {
     const email = req.body.email;
 
@@ -27,7 +25,7 @@ cookieController.setSSIDCookie = (req, res, next) => {
         status : 400,
         message : {err: error}
       }))
-  }
+  } else return next();
 }
 
 module.exports = cookieController;
