@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 // init const Schema as Schema constructor
 const Schema = mongoose.Schema;
-const bcrypt = require('bcryptjs');
 
+const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
 
 const userSchema = new Schema({
@@ -23,5 +23,5 @@ userSchema.pre('save', function(next) {
 });
 
 // Export user model through module.exports
-// The collection name should be 'user'
+// The collection name should be 'User'
 module.exports = mongoose.model('User', userSchema);
