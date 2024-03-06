@@ -1,6 +1,4 @@
-// require the path
 const path = require('path');
-// require html webpack plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack')
 
@@ -50,7 +48,7 @@ module.exports = {
   
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/index.html',
+      template: './index.html',
       filename: 'index.html',
       
     }),
