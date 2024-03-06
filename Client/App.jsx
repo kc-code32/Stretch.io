@@ -8,14 +8,12 @@ import SearchContainer from './containers/SearchContainer.jsx';
 // Init func app that returns our main containers
 const App = () => {
   return (
-
-    
     <Router>
       <HeaderContainer />
       <Routes>
-      <Route path='/' element={<MainContainer />}></Route>
-      <Route path='/homepage' element={<HomepageContainer />}></Route>
-      <Route path='/search' element={<SearchContainer />}></Route>
+        <Route path='/' element={<MainContainer />}></Route>
+        <Route path='/homepage' element={<HomepageContainer />}></Route>
+        <Route path='/search' element={<SearchContainer />}></Route>
       </Routes>
     </Router>
   );
