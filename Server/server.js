@@ -1,14 +1,14 @@
 const express = require('express');
-const app = express();
 const path = require('path');
-const PORT = 3000;
-const mongoose = require('mongoose');
-
 const cookieParser = require('cookie-parser');
 const serverRouter = require('./routes/serverRouter');
-app.use(cookieParser());
+const mongoose = require('mongoose');
 
-// connect to MongoDB
+const PORT = 3000;
+
+const app = express();
+
+// create mongoDB database and link project to it 
 const MONGO_URI = 'mongodb+srv://kelvinchen138:4k8LRm2HZm5FtkiN@stretchio.ls8p7y1.mongodb.net/?retryWrites=true&w=majority&appName=stretchIO';
 // const MONGO_URI = 'mongodb+srv://brok3turtl3:admin@cluster0.owew19l.mongodb.net/';
 
@@ -22,32 +22,61 @@ mongoose.connect(MONGO_URI, {
   .then(() => console.log('Connected to Mongo DB.'))
   .catch(err => console.log(err));
 
+/**
+* handle parsing request body 
+* Automatically parse urlencoded body content and form data from 
+* incoming requests and place it in req.body.  
+* handle parsing request cookie with cookieParser  
+*/
 app.use(express.json());
-// if you ever have a form on your frontend, express.urlencoded
-app.use(express.urlencoded({ extended: true })); // this will be helpful for stringifying a form req from an .html file
+app.use(express.urlencoded({ extended: true })); 
+app.use(cookieParser());
+
+/**
+ * handle requests for static files
+ */
+app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
+
+// statically serve everything in the build folder on the route '/build'
+app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
+/**
+* root
+*/
 // send server req to serverRouter
 app.use('/api', serverRouter);
 
+// serve index.html on the route '/'
+app.get('/*', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
 
-//REPLACE THIS WITH A NICE 404 PAGE
-app.get('*', (req, res) => {
-    res.send('API RUNNING!')
-})
-// global error handler
+
+/**
+ * 404 handler
+ */
+app.use('*', (req,res) => {
+  return res.status(404).send('Not Found');
+});
+
+/**
+ * Global error handler
+ */
 app.use((err, req, res, next) => {
-    const defaultErr = {
-        log: 'Express error handler caught unknown middleware error',
-        status: 400,
-        message: { err: 'An error occurred'},
-    };
-    const errorObj = Object.assign({}, defaultErr, err);
-    console.log(errorObj.log);
-    return res.status(errorObj.status).json(errorObj.message);
-})
+  const defaultErr = {
+    log : 'Express error handler caught unknown middleware error',
+    status : 400,
+    message : {err: 'An error occurred'}
+  }
+  const errObj = Object.assign({}, defaultErr, err);
+  console.log(errObj.log);
+  return res.status(errObj.status).json(errObj.message);
+});
 
 
-// listener
 
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+/**
+ * start server
+ */
+app.listen(PORT, ()=>{ console.log(`Listening on port ${PORT}...`); });

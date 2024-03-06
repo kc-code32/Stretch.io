@@ -1,6 +1,4 @@
-// require the path
 const path = require('path');
-// require html webpack plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack')
 
@@ -50,7 +48,7 @@ module.exports = {
   
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/index.html',
+      template: './index.html',
       filename: 'index.html',
       
     }),
@@ -58,10 +56,20 @@ module.exports = {
   ],
   //declare devServer
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, 'build'),
     },
-    proxy: { '/api': 'http://localhost:3000' },
-    
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/assets/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+    },
   },
 };
