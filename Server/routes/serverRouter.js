@@ -7,9 +7,13 @@ const sessionController = require('../controllers/sessionController');
 
 // responses to different requests from front-end
 
-router.post('/', userController.getStretches, (req, res) => {
-  return res.status(200).json(res.locals.apiRes);
-});
+router.post(
+  '/', 
+  userController.getStretches, 
+  (req, res) => {
+    return res.status(200).json(res.locals.apiRes);
+  }
+);
 
 router.post(
   '/register',
@@ -42,7 +46,7 @@ router.post(
 router.patch(
   //NEED ROUTE from Front End
   //KELVIN - Should we update below to '/favoriteAdd' ?
-  '/favoriteTest',
+  '/favoriteAdd',
   userController.favorites,
   (req, res) => {
     return res.status(200).json({
@@ -71,8 +75,12 @@ router.get('/isLoggedIn', sessionController.isLoggedIn, (req, res) => {
   });
 });
 
-router.get('/logout', (req, res) => {
-  return res.status(200).clearCookie('cookieId').redirect('/homepage');
-});
+router.get(
+  '/logout', 
+  sessionController.clearSession,
+  (req, res) => {
+    return res.status(200).clearCookie('cookieId').redirect('/homepage');
+  }
+);
 
 module.exports = router;
