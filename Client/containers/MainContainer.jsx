@@ -29,8 +29,8 @@ const MainContainer = () => {
           <img src={pic1} alt="Image 1" />
         </div>
         <div className="content">
-          <h2>BLAH BLAH BLAH</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum efficitur elit.</p>
+          <h2>DON'T FORGET!</h2>
+          <p>Even if you don't have time for a big workout, stretching in the morning and night really changes your body.</p>
         </div>
       </section>
 
@@ -39,8 +39,8 @@ const MainContainer = () => {
           <img src={pic2} alt="Image 2" />
         </div>
         <div className="content">
-          <h2>BLOOPITY BLOOP!!!</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum efficitur elit.</p>
+          <h2>FUN FACT!</h2>
+          <p>True success is achieved by stretching oneself, learning to feel comfortable being uncomfortable..</p>
         </div>
       </section>
 
@@ -49,8 +49,8 @@ const MainContainer = () => {
           <img src={pic3} alt="Image 3" />
         </div>
         <div className="content">
-          <h2>DIPPITY DO....</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum efficitur elit.</p>
+          <h2>IF I CAN, YOU CAN!</h2>
+          <p>I am always doing that which I cannot do, in order that I may learn how to do it..</p>
         </div>
       </section>
     </div>

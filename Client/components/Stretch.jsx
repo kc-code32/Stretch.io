@@ -11,7 +11,6 @@ const Stretch = ({ name, equipment, difficulty, instructions }) => {
 
   const addToFavorites = () => {
     setAdded(true);
-    console.log(user.userInfo.userDetail.email);
     dispatch(
       addFavorite(
         user.userInfo.userDetail.email,

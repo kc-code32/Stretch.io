@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import axios from 'axios';
 import { login } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 
 const LoginModal = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setModalIsOpen(false);
-    console.log('email: ', email)
-    console.log('password: ', password)
+    // console.log('email: ', email)
+    // console.log('password: ', password)
     dispatch(login(email, password))
-    console.log('handle submit hit!!!');
-    
+    // console.log('handle submit hit!!!');
   };
 
   return (

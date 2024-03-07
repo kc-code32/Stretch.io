@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const SearchContainer = () => {
   const [stretches, setStretches] = useState([]);
-  const [selectedMuscle, setSelectedMuscle] = useState('biceps');
+  const [selectedMuscle, setSelectedMuscle] = useState('Select Muscle');
 
   const user = useSelector((state) => state.userLogin);
   const dispatch = useDispatch();
@@ -75,7 +75,8 @@ const SearchContainer = () => {
 
   const renderMuscleOptions = () => {
     return Object.entries(muscleOptions).map(([key, value]) => (
-      <option key={key} value={key}>
+      // <option key={key} value={key}>
+      <option key={key} >
         {value}
       </option>
     ));

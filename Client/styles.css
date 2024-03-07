@@ -292,6 +292,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* align-items: flex-start; */
 }
 
 .stretchComp button {
@@ -308,6 +309,17 @@ body {
 
 .stretchComp button:hover {
   background-color: #5e5bad;
+}
+
+/*-------------------- HOMEPAGE CONTAINER STYLE  --------------------*/
+.stretchComp ul {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.stretchComp li {
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 /*-------------------- DROPDOWN MENU STYLES --------------------*/

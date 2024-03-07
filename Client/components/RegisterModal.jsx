@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 
 import { register } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 Modal.setAppElement('#app');
@@ -12,7 +11,6 @@ const RegisterModal = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -20,7 +18,6 @@ const RegisterModal = () => {
     setModalIsOpen(false)
     dispatch(register(name, email, password))
     // console.log('handle submit hit!!!');
-
   };
 
   return (
@@ -63,7 +60,7 @@ const RegisterModal = () => {
               Register
             </button>
             <button
-              //onClick={() => setModalIsOpen(false)}
+              onClick={() => setModalIsOpen(false)}
               className='modalButton'
             >
               Close
