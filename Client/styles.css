@@ -313,8 +313,13 @@ body {
 
 /*-------------------- HOMEPAGE CONTAINER STYLE  --------------------*/
 .stretchComp ul {
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.stretchComp li {
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 /*-------------------- DROPDOWN MENU STYLES --------------------*/
