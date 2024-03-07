@@ -1,9 +1,8 @@
 import {
 	SEARCH_REQUEST,
-    SEARCH_SUCCESS,
-    SEARCH_FAIL,
-    SEARCH_CLEAR
-	
+	SEARCH_SUCCESS,
+	SEARCH_FAIL,
+	SEARCH_CLEAR
 } from '../constants/searchConstants';
 
 export const searchReducer = (state = {}, action) => {

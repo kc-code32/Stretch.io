@@ -15,7 +15,9 @@ const MainContainer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.userInfo) {
+    console.log('testing');
+    console.log(user);
+    if (user.loggedIn === true) {
       navigate('/homepage');
     }
   }, [user]);

@@ -43,7 +43,7 @@ router.post(
 
 router.patch(
   '/favoriteAdd',
-  userController.favorites,
+  userController.addFavorites,
   (req, res) => {
     return res.status(200).json({
       addedFavoritesList: res.locals.addedFavoriteList,
@@ -75,7 +75,9 @@ router.get(
   '/logout', 
   sessionController.clearSession,
   (req, res) => {
-    return res.status(200).clearCookie('ssid').redirect('/homepage');
+    return res.status(200).clearCookie('ssid').json({
+      loggedIn: false,
+    });
   }
 );
 
