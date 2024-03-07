@@ -31,15 +31,11 @@ const HeaderContainer = () => {
   return (
     <div id='navBar'>
 
-<div id='flex-item' className='flex-item'>
-  <img src={iconImage} alt="Icon" className="icon" />
-  <h1 className='navHeader'>Stretch.io</h1>
-</div>
+      <div id='flex-item' className='flex-item'>
+        <img src={iconImage} alt="Icon" className="icon" />
+        <h1 className='navHeader'>Stretch.io</h1>
+      </div>
 
-
-      
-      
-      
       <div id='flex-item' className='authButtons'>
         {userInfo?.userInfo && (
           <>
