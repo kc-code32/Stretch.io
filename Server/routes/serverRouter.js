@@ -75,7 +75,9 @@ router.get(
   '/logout', 
   sessionController.clearSession,
   (req, res) => {
-    return res.status(200).clearCookie('ssid').redirect('/homepage');
+    return res.status(200).clearCookie('ssid').json({
+      loggedIn: false,
+    });
   }
 );
 

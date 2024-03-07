@@ -8,12 +8,18 @@ import {
 	USER_REGISTER_REQUEST,
 	USER_REGISTER_SUCCESS,
 	USER_LOGOUT
-	
 } from '../constants/userConstants';
 
-import { FAVORITES_LIST_REQUEST, FAVORITES_LIST_SUCCESS, FAVORITES_LIST_ADD_REQUEST, FAVORITES_LIST_ADD_SUCCESS, FAVORITES_LIST_ADD_FAIL, FAVORITES_LIST_DELETE_REQUEST, FAVORITES_LIST_DELETE_SUCCESS, FAVORITES_LIST_DELETE_FAIL } from '../constants/favoritesConstants';
-
-
+import { 
+	FAVORITES_LIST_REQUEST, 
+	FAVORITES_LIST_SUCCESS, 
+	FAVORITES_LIST_ADD_REQUEST, 
+	FAVORITES_LIST_ADD_SUCCESS, 
+	FAVORITES_LIST_ADD_FAIL, 
+	FAVORITES_LIST_DELETE_REQUEST, 
+	FAVORITES_LIST_DELETE_SUCCESS, 
+	FAVORITES_LIST_DELETE_FAIL 
+} from '../constants/favoritesConstants';
 
 export const login = (email, password) => async (dispatch) => {
 	try {
@@ -32,21 +38,19 @@ export const login = (email, password) => async (dispatch) => {
 			{ email, password },
 			config
 		);
-        console.log('userAction/login axios response: ', data)
+    
+		console.log('userAction/login axios response: ', data);
 
 		dispatch({
 			type: USER_LOGIN_SUCCESS,
 			payload: data,
 		});
 
-        dispatch({
-            type: FAVORITES_LIST_SUCCESS,
-            payload: data.userDetail.favStretches
-        })
+		dispatch({
+				type: FAVORITES_LIST_SUCCESS,
+				payload: data.userDetail.favStretches
+		})
 
-
-
-		//localStorage.setItem('userInfo', JSON.stringify(data));
 	} catch (error) {
 		console.log(error.message);
 		dispatch({
@@ -60,9 +64,42 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-	//localStorage.removeItem('userInfo');
-	dispatch({ type: USER_LOGOUT });
-	
+	try {
+		// const config = {
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// };
+		dispatch({
+			type: USER_LOGIN_REQUEST,
+		});
+
+		const { data } = await axios.get(
+			'/api/logout'
+			// { email, password },
+			// config
+		);
+
+		console.log('userAction/logout axios response: ', data);
+		
+
+		dispatch({ 
+			type: USER_LOGOUT,
+			payload: data.loggedIn,
+		});
+
+		console.log('disp logout');
+
+	} catch (error) {
+		console.log(error.message);
+		dispatch({
+			type: USER_LOGIN_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -83,17 +120,17 @@ export const register = (name, email, password) => async (dispatch) => {
 			config
 		);
 
-        console.log('data back from Axios call: ', data)
+    console.log('data back from Axios call: ', data);
 
 		dispatch({
 			type: USER_REGISTER_SUCCESS,
 			payload: data,
 		});
 
-		dispatch({
-			type: USER_LOGIN_SUCCESS,
-			payload: data,
-		});
+		// dispatch({
+		// 	type: USER_LOGIN_SUCCESS,
+		// 	payload: data,
+		// });
 
 		localStorage.setItem('userInfo', JSON.stringify(data));
 	} catch (error) {
@@ -109,7 +146,6 @@ export const register = (name, email, password) => async (dispatch) => {
 
 export const addFavorite = (email, name, equipment, difficulty, instructions) => async (dispatch) => {
 
-    
     try{
     dispatch({type: FAVORITES_LIST_ADD_REQUEST})
 
@@ -120,7 +156,7 @@ export const addFavorite = (email, name, equipment, difficulty, instructions) =>
       };
   
       const { data } = await axios.patch(
-        '/api/favoriteTest',
+        '/api/favoriteAdd',
         { email, name, equipment, difficulty, instructions},
         config
       );
