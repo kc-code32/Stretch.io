@@ -24,7 +24,6 @@ const FavoritesStretch = ({
   }
     
   //add functionality below to - refresh render
-  //add undo functionality? - Removed from Favorites, Re-Add to Favorites? --> removed on refresh?
   return (
     <div className='stretchComp'>
       <h3>{name}</h3>

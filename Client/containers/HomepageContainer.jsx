@@ -1,6 +1,4 @@
-import { formToJSON } from 'axios';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import FavoritesStretch from '../components/HomepageFavorites.jsx';
 import { useSelector } from 'react-redux';
 
@@ -8,8 +6,6 @@ const HomepageContainer = () => {
 
   const favorites = useSelector((state) => state.favorites.favorites);
   const user = useSelector((state) => state.userLogin);
-
-  // create handleDelete for delete button
 
   // init stretchComponents as empty arr, this will store Stretch components before rendering
   const favComponents = [];
